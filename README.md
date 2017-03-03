@@ -8,7 +8,7 @@ Wrap npm scripts in alarmist jobs
 
 ## Usage
 
-It is expected that your project already has `alarmist` installed
+It is expected that your project already has [`alarmist`](https://www.npmjs.com/package/alarmist) installed
 
 ```
 npm install alarmist alarmist-npm
