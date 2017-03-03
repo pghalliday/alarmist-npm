@@ -14,22 +14,22 @@ It is expected that your project already has [`alarmist`](https://www.npmjs.com/
 npm install alarmist alarmist-npm
 ```
 
-You can then add something like the following to your `package.json` scripts
+You can then add something like the following to your `package.json` scripts (using `mocha` for tests and `chokidar` to watch for changes
 
 ```javascript
 {
   ...
   "scripts": {
     ...
-    "my-script": "do something",
-    "alarmist:my-script": "alarmist-npm -n job-name my-script",
+    "cmd:test": "mocha",
+    "alarmist:test": "chokidar \"+(src|test)/**/*\" -c \"alarmist-npm -n test cmd:test\"",
     ...
   },
   ...
 }
 ```
 
-The job name is optional and will default to the script name.
+The job name (`test` in the example) is optional and will default to the script name.
 
 **NB. The script will be run with the silent flag to suppress the npm header, etc**
 
