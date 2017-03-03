@@ -14,7 +14,7 @@ It is expected that your project already has [`alarmist`](https://www.npmjs.com/
 npm install alarmist alarmist-npm
 ```
 
-You can then add something like the following to your `package.json` scripts (using `mocha` for tests and `chokidar` to watch for changes
+You can then add something like the following to your `package.json` scripts (using `mocha` for tests and `chokidar` to watch for changes)
 
 ```javascript
 {
