@@ -1,0 +1,56 @@
+{
+  "name": "alarmist-npm",
+  "version": "1.0.0",
+  "description": "Wrap npm scripts in alarmist jobs",
+  "bin": "bin/index.js",
+  "main": "lib/index.js",
+  "scripts": {
+    "cmd:lint": "eslint .",
+    "cmd:test": "cross-env NODE_ENV=test nyc mocha",
+    "cmd:coverage": "nyc report -r text && nyc check-coverage",
+    "cmd:build": "babel src --out-dir lib",
+    "cmd:coveralls": "cat ./coverage/lcov.info | coveralls",
+    "test": "run-s cmd:lint cmd:test cmd:coverage",
+    "build": "run-s test cmd:build",
+    "ci": "run-s build cmd:coveralls",
+    "alarmist:lint": "chokidar \"+(src|test)/**/*\" -c \"node ./bin/index.js cmd:lint\"",
+    "alarmist:test": "chokidar \"+(src|test)/**/*\" -c \"node ./bin/index.js cmd:test\"",
+    "alarmist:coverage": "chokidar \"coverage/lcov.info\" -c \"node ./bin/index.js cmd:coverage\"",
+    "alarmist:build": "chokidar \"src/**/*\" -c \"node ./bin/index.js cmd:build\"",
+    "start": "alarmist-monitor run-p -s alarmist:lint alarmist:test alarmist:coverage alarmist:build",
+    "watch": "chokidar '+(src|test)/**/*' -c 'npm run -s build'",
+    "prepublish": "run-s cmd:build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pghalliday/alarmist-npm.git"
+  },
+  "keywords": [],
+  "author": "Peter Halliday <pghalliday@gmail.com> (http://pghalliday.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pghalliday/alarmist-npm/issues"
+  },
+  "homepage": "https://github.com/pghalliday/alarmist-npm#readme",
+  "devDependencies": {
+    "alarmist": "^1.0.12",
+    "babel-cli": "^6.22.2",
+    "babel-plugin-istanbul": "^3.1.2",
+    "babel-preset-env": "^1.1.8",
+    "chai": "^3.5.0",
+    "chokidar-cli": "^1.2.0",
+    "coveralls": "^2.11.15",
+    "cross-env": "^3.1.4",
+    "eslint": "^3.14.1",
+    "eslint-config-google": "^0.7.1",
+    "mocha": "^3.2.0",
+    "npm-run-all": "^4.0.1",
+    "nyc": "^10.1.2",
+    "sinon": "^1.17.7",
+    "sinon-chai": "^2.8.0"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.23.0",
+    "minimist": "^1.2.0"
+  }
+}

@@ -1,0 +1,4 @@
+/test/fixtures/webpack/fail/index.js
+/node_modules/
+/coverage/
+/lib/
