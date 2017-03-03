@@ -1,6 +1,6 @@
 {
   "name": "alarmist-npm",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Wrap npm scripts in alarmist jobs",
   "bin": "bin/index.js",
   "main": "lib/index.js",
