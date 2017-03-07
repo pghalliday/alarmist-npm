@@ -3,20 +3,60 @@ import alarmist from 'alarmist';
 
 const name = 'name';
 const script = 'script';
+const args = ['arg1', 'arg2'];
+const color = false;
+const silent = true;
+const noSilent = false;
+const workingDir = 'working dir';
 const command = 'npm';
-const args = ['run', '-s', script];
+const noSilentArgs = ['run', script].concat(args);
+const silentArgs = ['run', '-s', script].concat(args);
 
 describe('alarmistNpm', () => {
   describe('#exec', () => {
-    before(async () => {
-      await alarmistNpm.exec(name, script);
+    describe('with silent on', () => {
+      before(async () => {
+        await alarmistNpm.exec({
+          name,
+          script,
+          args,
+          color,
+          silent,
+          workingDir,
+        });
+      });
+
+      it('should execute the npm script', () => {
+        alarmist.execJob.should.have.been.calledWith({
+          name,
+          command,
+          args: silentArgs,
+          color,
+          workingDir,
+        });
+      });
     });
 
-    it('should execute the npm script', () => {
-      alarmist.execJob.should.have.been.calledWith({
-        name,
-        command,
-        args,
+    describe('with silent off', () => {
+      before(async () => {
+        await alarmistNpm.exec({
+          name,
+          script,
+          args,
+          color,
+          silent: noSilent,
+          workingDir,
+        });
+      });
+
+      it('should execute the npm script', () => {
+        alarmist.execJob.should.have.been.calledWith({
+          name,
+          command,
+          args: noSilentArgs,
+          color,
+          workingDir,
+        });
       });
     });
   });

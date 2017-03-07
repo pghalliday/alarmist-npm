@@ -1,8 +1,14 @@
 import cli from '../../../src/cli';
 import alarmistNpm from '../../../src';
+import {
+  DEFAULT_WORKING_DIR,
+  DEFAULT_COLOR_OPTION,
+  DEFAULT_SILENT_OPTION,
+} from '../../../src/constants';
 
-const name = 'name';
 const script = 'script';
+const args = ['arg1', 'arg2'];
+const argv = [script].concat(args);
 
 describe('cli', () => {
   before(() => {
@@ -15,26 +21,18 @@ describe('cli', () => {
   describe('without name', () => {
     before(() => {
       alarmistNpm.exec.reset();
-      cli([script]);
+      cli(argv);
     });
 
     it('should execute the script', () => {
-      alarmistNpm.exec.should.have.been.calledWith(
-        script, script
-      );
-    });
-  });
-
-  describe('with a name', () => {
-    before(() => {
-      alarmistNpm.exec.reset();
-      cli(['-n', name, script]);
-    });
-
-    it('should execute the script', () => {
-      alarmistNpm.exec.should.have.been.calledWith(
-        name, script
-      );
+      alarmistNpm.exec.should.have.been.calledWithMatch({
+        name: script,
+        script,
+        args,
+        workingDir: DEFAULT_WORKING_DIR,
+        color: DEFAULT_COLOR_OPTION,
+        silent: DEFAULT_SILENT_OPTION,
+      });
     });
   });
 });

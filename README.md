@@ -11,7 +11,7 @@ Wrap npm scripts in alarmist jobs
 It is expected that your project already has [`alarmist`](https://www.npmjs.com/package/alarmist) installed
 
 ```
-npm install alarmist alarmist-npm
+npm install --save-dev alarmist alarmist-npm
 ```
 
 You can then add something like the following to your `package.json` scripts (using `mocha` for tests and `chokidar` to watch for changes)
@@ -22,7 +22,7 @@ You can then add something like the following to your `package.json` scripts (us
   "scripts": {
     ...
     "cmd:test": "mocha",
-    "alarmist:test": "chokidar \"+(src|test)/**/*\" -c \"alarmist-npm -n test cmd:test\"",
+    "alarmist:test": "chokidar \"+(src|test)/**/*\" -c \"alarmist-npm cmd:test\"",
     ...
   },
   ...
@@ -31,7 +31,32 @@ You can then add something like the following to your `package.json` scripts (us
 
 The job name (`test` in the example) is optional and will default to the script name.
 
-**NB. The script will be run with the silent flag to suppress the npm header, etc**
+```
+Usage: alarmist-npm [options] <script> [<arg>...]
+
+Start a job using an npm script name. The working directory
+should match the working directory of the monitor and usually this will
+be the default. If the job is started via a watcher started
+by the monitor then the 'ALARMIST_WORKING_DIRECTORY' environment
+variable will have already been set.
+
+<script>: The command to start the job
+<arg>: arguments for the command
+
+Environment Variables:
+
+FORCE_COLOR
+ALARMIST_WORKING_DIRECTORY
+ALARMIST_NPM_SILENT
+
+Options:
+    --name, -n            The name to use for the job, defaults to the script name
+    --working-dir, -w     The directory in which to write logs, etc (default: ".alarmist")
+    --force-color, -c     Set the FORCE_COLOR environment variable for the job (default: true)
+    --silent, -s          Set the silent flag for npm run (default: true)
+    --help, -h            Show help
+    --version, -v         Show version number
+```
 
 ## Contributing
 
