@@ -29,7 +29,7 @@ You can then add something like the following to your `package.json` scripts (us
 }
 ```
 
-The job name (`test` in the example) is optional and will default to the script name.
+The job name will default to the script name.
 
 ```
 Usage: alarmist-npm [options] <script> [<arg>...]
