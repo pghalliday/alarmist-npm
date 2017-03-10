@@ -2,6 +2,7 @@ import cli from '../../../src/cli';
 import alarmistNpm from '../../../src';
 import {
   DEFAULT_WORKING_DIR,
+  DEFAULT_SERVICE_OPTION,
   DEFAULT_COLOR_OPTION,
   DEFAULT_SILENT_OPTION,
 } from '../../../src/constants';
@@ -30,6 +31,7 @@ describe('cli', () => {
         script,
         args,
         workingDir: DEFAULT_WORKING_DIR,
+        service: DEFAULT_SERVICE_OPTION,
         color: DEFAULT_COLOR_OPTION,
         silent: DEFAULT_SILENT_OPTION,
       });

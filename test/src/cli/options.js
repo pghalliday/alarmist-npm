@@ -6,6 +6,7 @@ import _ from 'lodash';
 import {
   DEFAULT_WORKING_DIR,
   DEFAULT_COLOR_OPTION,
+  DEFAULT_SERVICE_OPTION,
   DEFAULT_SILENT_OPTION,
   NO_SCRIPT_ERROR,
   MULTIPLE_WORKING_DIRECTORIES_ERROR,
@@ -52,6 +53,7 @@ const shortOptions = [
   name,
   '-c',
   '-s',
+  '-q',
   '-w',
   workingDir,
   script,
@@ -63,6 +65,7 @@ const fullOptions = [
   '--name',
   name,
   '--force-color',
+  '--service',
   '--silent',
   '--working-dir',
   workingDir,
@@ -73,6 +76,7 @@ const fullOptions = [
 
 const negatedOptions = [
   '--no-force-color',
+  '--no-service',
   '--no-silent',
   script,
   arg1,
@@ -166,6 +170,7 @@ describe('cli', () => {
         'with no options': {
           argv: noOptions,
           name: script,
+          service: DEFAULT_SERVICE_OPTION,
           color: DEFAULT_COLOR_OPTION,
           silent: DEFAULT_SILENT_OPTION,
           workingDir: DEFAULT_WORKING_DIR,
@@ -173,6 +178,7 @@ describe('cli', () => {
         'with short options': {
           argv: shortOptions,
           name: name,
+          service: true,
           color: true,
           silent: true,
           workingDir,
@@ -180,6 +186,7 @@ describe('cli', () => {
         'with full options': {
           argv: fullOptions,
           name: name,
+          service: true,
           color: true,
           silent: true,
           workingDir,
@@ -187,6 +194,7 @@ describe('cli', () => {
         'with negated options': {
           argv: negatedOptions,
           name: script,
+          service: false,
           color: false,
           silent: false,
           workingDir: DEFAULT_WORKING_DIR,
@@ -207,6 +215,10 @@ describe('cli', () => {
 
           it('should set the args', () => {
             options.args.should.eql([arg1, arg2]);
+          });
+
+          it('should set the service option', () => {
+            options.service.should.eql(value.service);
           });
 
           it('should set the color option', () => {

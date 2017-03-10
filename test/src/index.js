@@ -4,6 +4,7 @@ import alarmist from 'alarmist';
 const name = 'name';
 const script = 'script';
 const args = ['arg1', 'arg2'];
+const service = true;
 const color = false;
 const silent = true;
 const noSilent = false;
@@ -20,6 +21,7 @@ describe('alarmistNpm', () => {
           name,
           script,
           args,
+          service,
           color,
           silent,
           workingDir,
@@ -31,6 +33,7 @@ describe('alarmistNpm', () => {
           name,
           command,
           args: silentArgs,
+          service,
           color,
           workingDir,
         });
@@ -43,6 +46,7 @@ describe('alarmistNpm', () => {
           name,
           script,
           args,
+          service,
           color,
           silent: noSilent,
           workingDir,
@@ -54,6 +58,7 @@ describe('alarmistNpm', () => {
           name,
           command,
           args: noSilentArgs,
+          service,
           color,
           workingDir,
         });

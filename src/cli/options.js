@@ -4,9 +4,11 @@ import _ from 'lodash';
 import cliclopts from 'cliclopts';
 import {
   WORKING_DIRECTORY_VAR,
+  SERVICE_VAR,
   FORCE_COLOR_VAR,
   SILENT_VAR,
   DEFAULT_WORKING_DIR,
+  DEFAULT_SERVICE_OPTION,
   DEFAULT_COLOR_OPTION,
   DEFAULT_SILENT_OPTION,
   MULTIPLE_WORKING_DIRECTORIES_ERROR,
@@ -16,6 +18,12 @@ import {
 
 // istanbul ignore next
 const toBool = (value) => value === 'true';
+
+const defaultService = optionDefault(
+  SERVICE_VAR,
+  DEFAULT_SERVICE_OPTION,
+  toBool,
+);
 
 const defaultColor = optionDefault(
   FORCE_COLOR_VAR,
@@ -44,6 +52,12 @@ const cliOpts = cliclopts([{
   default: defaultWorkingDirectory,
   help: 'The directory in which to write logs, etc',
 }, {
+  name: 'service',
+  abbr: 's',
+  boolean: true,
+  default: defaultService,
+  help: 'Flag job as a service',
+}, {
   name: 'force-color',
   abbr: 'c',
   boolean: true,
@@ -51,7 +65,7 @@ const cliOpts = cliclopts([{
   help: 'Set the FORCE_COLOR environment variable for the job',
 }, {
   name: 'silent',
-  abbr: 's',
+  abbr: 'q',
   boolean: true,
   default: defaultSilent,
   help: 'Set the silent flag for npm run',
@@ -99,6 +113,7 @@ export function parse(argv) {
   }
   const args = parsed._.slice(1);
   const name = parsed['name'] || script;
+  const service = parsed['service'];
   const color = parsed['force-color'];
   const silent = parsed['silent'];
   const workingDir = parsed['working-dir'];
@@ -106,6 +121,7 @@ export function parse(argv) {
     name,
     script,
     args,
+    service,
     color,
     silent,
     workingDir,
