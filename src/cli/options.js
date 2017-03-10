@@ -56,7 +56,7 @@ const cliOpts = cliclopts([{
   abbr: 's',
   boolean: true,
   default: defaultService,
-  help: 'Flag job as a service',
+  help: 'Flag the job as a service',
 }, {
   name: 'force-color',
   abbr: 'c',
