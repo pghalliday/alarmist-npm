@@ -5,6 +5,7 @@ const name = 'name';
 const script = 'script';
 const args = ['arg1', 'arg2'];
 const service = true;
+const metric = true;
 const color = false;
 const silent = true;
 const noSilent = false;
@@ -22,6 +23,7 @@ describe('alarmistNpm', () => {
           script,
           args,
           service,
+          metric,
           color,
           silent,
           workingDir,
@@ -34,6 +36,7 @@ describe('alarmistNpm', () => {
           command,
           args: silentArgs,
           service,
+          metric,
           color,
           workingDir,
         });
@@ -47,6 +50,7 @@ describe('alarmistNpm', () => {
           script,
           args,
           service,
+          metric,
           color,
           silent: noSilent,
           workingDir,
@@ -59,6 +63,7 @@ describe('alarmistNpm', () => {
           command,
           args: noSilentArgs,
           service,
+          metric,
           color,
           workingDir,
         });

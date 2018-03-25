@@ -10,6 +10,7 @@ async function exec({
   args,
   workingDir,
   service,
+  metric,
   color,
   silent,
 }) {
@@ -21,6 +22,7 @@ async function exec({
     args: fullArgs,
     workingDir,
     service,
+    metric,
     color,
   });
 }

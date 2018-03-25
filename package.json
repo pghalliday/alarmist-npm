@@ -1,6 +1,6 @@
 {
   "name": "alarmist-npm",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Wrap npm scripts in alarmist jobs",
   "bin": "bin/index.js",
   "main": "lib/index.js",
@@ -33,7 +33,7 @@
   },
   "homepage": "https://github.com/pghalliday/alarmist-npm#readme",
   "devDependencies": {
-    "alarmist": "^1.0.18",
+    "alarmist": "^1.0.25",
     "babel-cli": "^6.22.2",
     "babel-plugin-istanbul": "^3.1.2",
     "babel-preset-env": "^1.1.8",

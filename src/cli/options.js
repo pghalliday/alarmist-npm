@@ -5,10 +5,12 @@ import cliclopts from 'cliclopts';
 import {
   WORKING_DIRECTORY_VAR,
   SERVICE_VAR,
+  METRIC_VAR,
   FORCE_COLOR_VAR,
   SILENT_VAR,
   DEFAULT_WORKING_DIR,
   DEFAULT_SERVICE_OPTION,
+  DEFAULT_METRIC_OPTION,
   DEFAULT_COLOR_OPTION,
   DEFAULT_SILENT_OPTION,
   MULTIPLE_WORKING_DIRECTORIES_ERROR,
@@ -22,6 +24,12 @@ const toBool = (value) => value === 'true';
 const defaultService = optionDefault(
   SERVICE_VAR,
   DEFAULT_SERVICE_OPTION,
+  toBool,
+);
+
+const defaultMetric = optionDefault(
+  METRIC_VAR,
+  DEFAULT_METRIC_OPTION,
   toBool,
 );
 
@@ -57,6 +65,12 @@ const cliOpts = cliclopts([{
   boolean: true,
   default: defaultService,
   help: 'Flag the job as a service',
+}, {
+  name: 'metric',
+  abbr: 'm',
+  boolean: true,
+  default: defaultMetric,
+  help: 'Flag the job as a metric',
 }, {
   name: 'force-color',
   abbr: 'c',
@@ -114,6 +128,7 @@ export function parse(argv) {
   const args = parsed._.slice(1);
   const name = parsed['name'] || script;
   const service = parsed['service'];
+  const metric = parsed['metric'];
   const color = parsed['force-color'];
   const silent = parsed['silent'];
   const workingDir = parsed['working-dir'];
@@ -122,6 +137,7 @@ export function parse(argv) {
     script,
     args,
     service,
+    metric,
     color,
     silent,
     workingDir,
